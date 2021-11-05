@@ -51,7 +51,7 @@ def main():
 
 def repay_all(amount, lending_pool, account):
     approve_erc20(
-        Web3.toWei(amount, "ether"),
+        amount,
         lending_pool,
         config["networks"][network.show_active()]["dai_token"],
         account,
