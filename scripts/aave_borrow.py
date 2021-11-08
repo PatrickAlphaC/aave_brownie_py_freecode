@@ -4,7 +4,7 @@ from scripts.get_weth import get_weth
 from web3 import Web3
 
 # 0.1
-amount = Web3.toWei(0.1, "ether")
+AMOUNT = Web3.toWei(0.1, "ether")
 
 
 def main():
@@ -13,10 +13,10 @@ def main():
     if network.show_active() in ["mainnet-fork"]:
         get_weth()
     lending_pool = get_lending_pool()
-    approve_tx = approve_erc20(amount, lending_pool.address, erc20_address, account)
+    approve_tx = approve_erc20(AMOUNT, lending_pool.address, erc20_address, account)
     print("Depositing...")
     tx = lending_pool.deposit(
-        erc20_address, amount, account.address, 0, {"from": account}
+        erc20_address, AMOUNT, account.address, 0, {"from": account}
     )
     tx.wait(1)
     print("Deposited!")
@@ -43,7 +43,7 @@ def main():
     borrow_tx.wait(1)
     print("We borrowed some DAI!")
     get_borrowable_data(lending_pool, account)
-    repay_all(amount, lending_pool, account)
+    repay_all(AMOUNT, lending_pool, account)
     print(
         "You just deposited, borrowed, and repayed with Aave, Brownie, and Chainlink!"
     )
