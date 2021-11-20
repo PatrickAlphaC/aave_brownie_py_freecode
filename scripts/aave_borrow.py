@@ -43,7 +43,7 @@ def main():
     borrow_tx.wait(1)
     print("We borrowed some DAI!")
     get_borrowable_data(lending_pool, account)
-    repay_all(AMOUNT, lending_pool, account)
+    repay_all(amount_dai_to_borrow, lending_pool, account)
     print(
         "You just deposited, borrowed, and repayed with Aave, Brownie, and Chainlink!"
     )
@@ -58,7 +58,7 @@ def repay_all(amount, lending_pool, account):
     )
     repay_tx = lending_pool.repay(
         config["networks"][network.show_active()]["dai_token"],
-        amount,
+        Web3.toWei(amount, "ether"),
         1,
         account.address,
         {"from": account},
